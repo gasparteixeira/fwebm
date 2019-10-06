@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <div>
       <AppBar position="static">
-        <Toolbar>React Material UI Example</Toolbar>
+        <Toolbar>WEBM Generator</Toolbar>
       </AppBar>
     </div>
   );

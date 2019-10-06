@@ -1,12 +1,17 @@
 {
   "name": "fwebm",
-  "version": "0.1.0",
+  "version": "0.1.0-beta",
   "private": true,
   "description": "Simple client to generate webm videos from images",
   "author": "Gaspar Teixeira <gaspar.teixeira@gamil.com>",
   "build": {
-    "productName": "Fwebm",
-    "appId": "com.ford.fwebm"
+    "productName": "FWEBM",
+    "appId": "com.ford.fwebm",
+    "copyright": "Copyright © 2019",
+    "generateUpdatesFilesForAllChannels": true,
+    "mac": {
+      "category": "your.app.category.type"
+    }
   },
   "main": "public/electron.js",
   "homepage": "./",
@@ -16,6 +21,7 @@
     "@material-ui/styles": "^4.2.1",
     "electron-is-dev": "^1.1.0",
     "ffmpeg-static": "^2.5.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
@@ -23,20 +29,22 @@
     "wait-on": "^3.3.0"
   },
   "devDependencies": {
+    "@rescripts/cli": "^0.0.12",
+    "@rescripts/rescript-env": "^0.0.10",
     "concurrently": "^4.1.1",
     "cross-env": "^5.2.0",
-    "electron": "^5.0.8",
+    "electron": "^6.0.11",
     "electron-builder": "^21.1.1"
   },
   "scripts": {
-    "react-start": "react-scripts start",
-    "react-build": "react-scripts build",
-    "react-test": "react-scripts test --env=jsdom",
-    "react-eject": "react-scripts eject",
-    "electron-build": "electron-builder",
-    "release": "yarn react-build && electron-builder --publish=always",
-    "build": "yarn react-build && yarn electron-build",
-    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
+    "start": "rescripts start",
+    "build": "rescripts build",
+    "test": "rescripts test",
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "rm -rf dist && electron-builder -mw -c.mac.identity=null"
   },
   "eslintConfig": {
     "extends": "react-app"
